@@ -3,15 +3,17 @@
 	<tr>
 		<th style="text-align: left; border: 1px solid black ">Listing Title</th>
 		<th style="text-align: left; border: 1px solid black ">Price</th>
-		<th style="text-align: left; border: 1px solid black ">Seller</th>		
+		<th style="text-align: left; border: 1px solid black ">Seller</th>
+		<th style="text-align: left; border: 1px solid black ">Image</th>
 	</tr>
 	<% @listings.each do |listing| %>
 		<tr>
 			<td style="text-align: left; border: 1px solid black "><%= link_to listing.title, listing_path(listing)%></td>
 			<td style="text-align: left; border: 1px solid black ">$<%= listing.price%></td>
 			<td style="text-align: left; border: 1px solid black "><%= listing.seller.username%></td>
-		</tr>	
+			<td style="text-align: center; border: 1px solid black "><img style="width: 50px; height: 50px;" src=<%= listing.image_url %>/></td>
+		</tr>
 
-	<% end %>	
+	<% end %>
 
 </table>

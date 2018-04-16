@@ -6,26 +6,62 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
-listing_1 = Listing.create(
+listings = []
+listings << listing_1 = Listing.new(
   title: "Macbook Pro",
   description: "We're so brave",
   price: 100000.00,
+  image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
 )
+
+listings << listing_2 = Listing.new(
+  title: "HP Envy",
+  description: "Windows best",
+  price: 90000.00,
+  image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
+)
+
+listings << listing_3 = Listing.new(
+  title: "Razer Blade",
+  description: "Ultimate thin and light gaming",
+  price: 120000.00,
+  image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
+)
+listings << listing_4 = Listing.new(
+  title: "eMachines",
+  description: "old, sold as is",
+  price: 1000.00,
+  image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
+)
+listings << listing_5 = Listing.new(
+  title: "MSI GS65VR",
+  description: "1070 max q",
+  price: 120000.00,
+  image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
+)
+
+
 
 user_1 = User.create(
   username: "Steve Jobs",
-  password: "Apple"
+  password: "Apple1234"
+)
+user_2 = User.create(
+  username: "Bill Gates",
+  password: "Microsoft1234"
 )
 
-user_1.listings << listing_1
+user_1.listings << [listing_1, listing_2]
+user_2.listings << [listing_3, listing_4, listing_5]
 
-user_2 = User.create(
+user_3 = User.create(
   username: "Flatiron Student",
-  password: "Macbooks"
+  password: "Macbooks1234"
 )
 
 order = Order.new()
 order.listing = listing_1
 order.buyer = user_2
 order.save
+
+listings.each{|l| l.save}
