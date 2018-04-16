@@ -7,4 +7,8 @@ class Listing < ApplicationRecord
   validates :description, presence: true
   validates :price, presence: true
   validates :image_url, presence: true
+
+  def seller=(seller_id_str)
+  	self.seller_id = seller_id_str.to_i
+  end
 end

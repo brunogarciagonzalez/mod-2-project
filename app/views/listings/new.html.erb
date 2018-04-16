@@ -1,0 +1,17 @@
+<h1>Create a Listing</h1>
+<%= form_for @listing do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %> <br> 
+	<%= f.label :description %> <br>
+	<%= f.text_area :description %><br>
+	<%= f.label :price %>
+	<%= f.number_field :price %><br>
+	<%= f.label "Image Url" %>
+	<%= f.text_field :image_url %><br>
+
+
+	<%= f.label :Seller %><br>
+  	<%= f.collection_select :seller, User.all, :id, :username %> <br>
+  	<%= f.submit "Create Listing" %>
+
+<% end %>
