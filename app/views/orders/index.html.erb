@@ -1,0 +1,19 @@
+<h1>Orders Index</h1>
+<table style="width: 60%; border: 1px solid black">
+	<tr>
+		<th style="text-align: left; border: 1px solid black ">Order Id</th>
+		<th style="text-align: left; border: 1px solid black ">Listing Title</th>
+		<th style="text-align: left; border: 1px solid black ">Buyer</th>		
+		<th style="text-align: left; border: 1px solid black ">Seller</th>		
+	</tr>
+	<% @orders.each do |order| %>
+		<tr>
+			<td style="text-align: left; border: 1px solid black "><%= order.id %></td>
+			<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
+			<td style="text-align: left; border: 1px solid black "><%= link_to order.buyer.username, user_path(order.buyer)%></td>
+			<td style="text-align: left; border: 1px solid black "><%= link_to order.seller.username, order_path(order.seller)%></td>
+		</tr>	
+
+	<% end %>	
+
+</table>
