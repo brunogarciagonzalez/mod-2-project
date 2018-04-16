@@ -1,0 +1,17 @@
+<h1>Listings Index</h1>
+<table style="width: 60%; border: 1px solid black">
+	<tr>
+		<th style="text-align: left; border: 1px solid black ">Listing Title</th>
+		<th style="text-align: left; border: 1px solid black ">Price</th>
+		<th style="text-align: left; border: 1px solid black ">Seller</th>		
+	</tr>
+	<% @listings.each do |listing| %>
+		<tr>
+			<td style="text-align: left; border: 1px solid black "><%= link_to listing.title, listing_path(listing)%></td>
+			<td style="text-align: left; border: 1px solid black ">$<%= listing.price%></td>
+			<td style="text-align: left; border: 1px solid black "><%= listing.seller.username%></td>
+		</tr>	
+
+	<% end %>	
+
+</table>
