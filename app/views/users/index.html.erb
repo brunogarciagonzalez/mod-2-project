@@ -1,0 +1,14 @@
+<h1>Users Index</h1>
+<table style="width: 60%; border: 1px solid black">
+	<tr>
+		<th style="text-align: left; border: 1px solid black ">ID</th>
+		<th style="text-align: left; border: 1px solid black ">Username</th>
+	</tr>
+	<% @users.each do |user| %>
+		<tr>
+			<td style="text-align: left; border: 1px solid black "><%= user.id %></td>
+			<td style="text-align: left; border: 1px solid black "><%= link_to user.username, user_path(user) %></td>
+		</tr>
+	<% end %>
+
+</table>
