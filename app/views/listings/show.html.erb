@@ -1,0 +1,6 @@
+<h1>(Listing #<%= @listing.id %>) <%= @listing.title %></h1>
+<h3>Price: $<%= @listing.price %></h3> <!-- skateboard => USD -->
+<img style="width: 40%; align-text: left;" src="<%= @listing.image_url %>">
+<h4>Listing Description:</h4>
+<h5><%= @listing.description %></h5>
+<p>Sold By: <%= @listing.seller.username %> (See <%= link_to "Seller Page", user_path(@listing.seller)%>)</p>

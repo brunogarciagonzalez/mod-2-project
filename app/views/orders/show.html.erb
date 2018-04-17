@@ -1,0 +1,8 @@
+<h1>Order Receipt #<%= @order.id %></h1>
+<h5>Ordered on: <%= @order.created_at.strftime("%A, %B %Y at %H:%M %z") %></h5>
+<!-- may need to add order updated at timestamp if order is edited
+    (e.g. the order is cancelled) -->
+<h5>Listing Title: <%= link_to @order.listing.title, listing_path(@order.listing) %></h5>
+<h5>Listing Price: $<%= @order.listing.price %></h5>
+<p>Sold By: <%= @order.seller.username %> (See <%= link_to "Seller Page", user_path(@order.seller)%>)</p>
+<p>Bought By: <%= @order.buyer.username %> (See <%= link_to "Buyer Page", user_path(@order.buyer)%>)</p>

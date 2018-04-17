@@ -3,11 +3,11 @@ class OrdersController < ApplicationController
 
 	#Create
 	def new
-		
+
 	end
 
 	def create
-		
+
 	end
 	#Read
 	def index
@@ -15,27 +15,27 @@ class OrdersController < ApplicationController
 	end
 
 	def show
-		
+		# populated via :set_order
 	end
 
 	#Update
 
 	def edit
-		
+
 	end
 
 	def update
-		
+
 	end
 
 	#Destroy
 	def destroy
-		
+
 	end
 
 	private
 	def set_order
-		@order = Order.find(params[:id])		
+		@order = Order.find(params[:id])
 	end
 
 

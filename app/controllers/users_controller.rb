@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-
+		#populated via :set_user
 	end
 
 	#Update
