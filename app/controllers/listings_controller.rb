@@ -20,22 +20,22 @@ class ListingsController < ApplicationController
 	end
 
 	def show
-		
+		# populated via :set_listing
 	end
 
 	#Update
 
 	def edit
-		
+
 	end
 
 	def update
-		
+
 	end
 
 	#Destroy
 	def destroy
-		
+
 	end
 
 	private

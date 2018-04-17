@@ -1,8 +1,9 @@
-<h1><%= @listing.title %></h1>
+
+<h1>(Listing #<%= @listing.id %>) <%= @listing.title %></h1>
 
 <div>
 	<h3>Sold By: <%= link_to @listing.seller.username, user_path(@listing.seller) %></h3>
-	<img src=<%= @listing.image_url %>/>
+	<img style="width: 40%; align-text: left;" src="<%= @listing.image_url %>">
 	<h3>Description</h3>
 	<p><%= @listing.description %></p>
 	<h3>Price: $<%= @listing.price.round(2, :truncate).to_f %></h3>
