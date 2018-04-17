@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   #### associations ####
+  has_one :wallet
   has_many :listings, foreign_key: 'seller_id'
   has_many :orders, foreign_key: 'buyer_id'
   has_many :orders, through: :listings, foreign_key: 'seller_id'
