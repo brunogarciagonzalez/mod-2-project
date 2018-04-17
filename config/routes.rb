@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root to: "listings#index"
   get '/login', to: 'sessions#new'
+  get '/logout', to: 'sessions#signout'
   post '/signin', to: 'sessions#signin'
   resources :wallets
   resources :listings

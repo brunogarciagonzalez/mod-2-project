@@ -7,7 +7,10 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-
+		@order = Order.create(listing_id: order_params[:listing_id],
+													quantity: order_params[:quantity],
+													buyer_id: session[:user_id])
+		redirect_to order_path(@order)
 	end
 	#Read
 	def index
@@ -38,5 +41,7 @@ class OrdersController < ApplicationController
 		@order = Order.find(params[:id])
 	end
 
-
+	def order_params
+		params.require(:order).permit(:listing_id, :quantity)
+	end
 end

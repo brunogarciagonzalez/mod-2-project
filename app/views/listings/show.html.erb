@@ -1,6 +1,5 @@
 
 <h1>(Listing #<%= @listing.id %>) <%= @listing.title %></h1>
-<h1><%= if logged_in? then current_user.username end%></h1>
 <div>
 	<h3>Sold By: <%= link_to @listing.seller.username, user_path(@listing.seller) %></h3>
 	<img style="width: 40%; align-text: left;" src="<%= @listing.image_url %>">
@@ -9,3 +8,16 @@
 	<h3>Price: $<%= @listing.price.round(2, :truncate).to_f %></h3>
 
 </div>
+
+<% if logged_in? %>
+	# we may need an action in the listing controller that accepts this form & associated logic
+
+	<h3>Place Order: </h3>
+	<%= form_for(@order) do |f| %>
+		<input type="hidden" name="order[listing_id]" value="<%= @listing.id %>" />
+		<%= f.label :quantity %>
+		<%=	f.select :quantity, options_for_select(1..50) %>
+		<%= f.submit "Order" %>
+
+	<% end %>
+<% end %>
