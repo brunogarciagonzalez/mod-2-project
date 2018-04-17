@@ -57,11 +57,13 @@ listings << listing_5 = Listing.new(
 
 user_1 = User.create(
   username: "Steve Jobs",
-  password: "Apple1234"
+  password: "Apple1234",
+  email: "steve@apple.com"
 )
 user_2 = User.create(
   username: "Bill Gates",
-  password: "Microsoft1234"
+  password: "Microsoft1234",
+  email: "bill@microsoft.com"
 )
 
 user_1.listings << [listing_1, listing_2]
@@ -69,7 +71,8 @@ user_2.listings << [listing_3, listing_4, listing_5]
 
 user_3 = User.create(
   username: "Flatiron Student",
-  password: "Macbooks1234"
+  password: "Macbooks1234",
+  email: "student@flatironschool.com"
 )
 
 order = Order.new()

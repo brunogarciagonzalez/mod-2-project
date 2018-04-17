@@ -15,7 +15,6 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		byebug
 		#populated via :set_user
 	end
 
@@ -36,7 +35,7 @@ class UsersController < ApplicationController
 
 	private
 	def set_user
-		@user = User.find(session[:user_id])
+		@user = User.find(params[:id])
 	end
 
 end

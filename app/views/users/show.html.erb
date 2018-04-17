@@ -1,7 +1,12 @@
-<h1>Seller username: <%= @user.username %></h1>
-<h3>Seller Id: <%= @user.id %></h3>
+<h1>Username: <%= @user.username %></h1>
+<h3>User ID: <%= @user.id %></h3>
+<h3>Contact: <a href="mailto:<%= @user.email %>"><%= @user.email %></a></h3>
 
-<h2>Listings By This User</h2>
+<% if logged_in? && (current_user.id == @user.id) %>
+	<h2>Your Listings</h2>
+<% else %>
+	<h2>Listings By This User</h2>
+<% end %>
 <table style="width: 60%; border: 1px solid black">
 	<tr>
 		<th style="text-align: left; border: 1px solid black ">Listing Title</th>
@@ -17,31 +22,56 @@
 	<% end %>
 </table>
 
-<h2>Wallet</h2>
-<table style="width: 60%; border: 1px solid black">
-	<tr>
-		<th style="text-align: left; border: 1px solid black ">Currency</th>
-		<th style="text-align: left; border: 1px solid black ">Address</th>
-		<th style="text-align: left; border: 1px solid black ">Balance</th>
-	</tr>
-	<tr>
-		<td style="text-align: left; border: 1px solid black ">USD</td>
-		<td style="text-align: left; border: 1px solid black "> N/A </td>
-		<td style="text-align: center; border: 1px solid black "><%= @user.wallet.usd_balance %></td>
-	</tr>
-	<tr>
-		<td style="text-align: left; border: 1px solid black ">Bitcoin</td>
-		<td style="text-align: left; border: 1px solid black "><%= @user.wallet.btc_address %></td>
-		<td style="text-align: center; border: 1px solid black "><%= @user.wallet.btc_balance %></td>
-	</tr>
-	<tr>
-		<td style="text-align: left; border: 1px solid black ">Ethereum</td>
-		<td style="text-align: left; border: 1px solid black "><%= @user.wallet.eth_address %></td>
-		<td style="text-align: center; border: 1px solid black "><%= @user.wallet.eth_balance %></td>
-	</tr>
-	<tr>
-		<td style="text-align: left; border: 1px solid black ">Litecoin</td>
-		<td style="text-align: left; border: 1px solid black "><%= @user.wallet.ltc_address %></td>
-		<td style="text-align: center; border: 1px solid black "><%= @user.wallet.ltc_balance %></td>
-	</tr>
-</table>
+
+<% if logged_in? && (current_user.id == @user.id) %>
+	<h2>Your Order History</h2>
+	<table style="width: 60%; border: 1px solid black">
+		<tr>
+			<th style="text-align: left; border: 1px solid black ">Order Id</th>
+			<th style="text-align: left; border: 1px solid black ">Listing Title</th>
+			<th style="text-align: left; border: 1px solid black ">Buyer</th>
+			<th style="text-align: left; border: 1px solid black ">Seller</th>
+		</tr>
+		<% @user.orders.each do |order| %>
+			<tr>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.id, order_path(order) %></td>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.buyer.username, user_path(order.buyer)%></td>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.seller.username, order_path(order.seller)%></td>
+			</tr>
+		<% end %>
+
+	</table>
+
+	<!-- ############################# -->
+
+	<h2>Your Wallet</h2>
+	<table style="width: 60%; border: 1px solid black">
+		<tr>
+			<th style="text-align: left; border: 1px solid black ">Currency</th>
+			<th style="text-align: left; border: 1px solid black ">Balance</th>
+			<th style="text-align: left; border: 1px solid black ">Address</th>
+		</tr>
+		<tr>
+			<td style="text-align: left; border: 1px solid black ">USD</td>
+			<td style="text-align: center; border: 1px solid black "><%= @user.wallet.usd_balance %></td>
+			<td style="text-align: left; border: 1px solid black "> N/A </td>
+		</tr>
+		<tr>
+			<td style="text-align: left; border: 1px solid black ">Bitcoin</td>
+			<td style="text-align: center; border: 1px solid black "><%= @user.wallet.btc_balance %></td>
+			<td style="text-align: left; border: 1px solid black "><%= @user.wallet.btc_address %></td>
+		</tr>
+		<tr>
+			<td style="text-align: left; border: 1px solid black ">Ethereum</td>
+			<td style="text-align: center; border: 1px solid black "><%= @user.wallet.eth_balance %></td>
+			<td style="text-align: left; border: 1px solid black "><%= @user.wallet.eth_address %></td>
+		</tr>
+		<tr>
+			<td style="text-align: left; border: 1px solid black ">Litecoin</td>
+			<td style="text-align: center; border: 1px solid black "><%= @user.wallet.ltc_balance %></td>
+			<td style="text-align: left; border: 1px solid black "><%= @user.wallet.ltc_address %></td>
+		</tr>
+	</table>
+
+<% end %>

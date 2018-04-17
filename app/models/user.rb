@@ -14,6 +14,9 @@ class User < ApplicationRecord
   #### validations ####
   validates :username, presence: true
   validates :username, uniqueness: true
+  validates :email, presence: true
+  validates :email, uniqueness: true
+  validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   # validates :password, length: {minimum: 8}
   # validate :has_uppercase_letters?
   # validate :has_digits?

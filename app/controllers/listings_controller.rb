@@ -21,6 +21,7 @@ class ListingsController < ApplicationController
 
 	def show
 		# populated via :set_listing
+		@order = Order.new
 	end
 
 	#Update
