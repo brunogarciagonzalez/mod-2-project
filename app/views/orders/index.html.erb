@@ -12,8 +12,7 @@
 			<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
 			<td style="text-align: left; border: 1px solid black "><%= link_to order.buyer.username, user_path(order.buyer)%></td>
 			<td style="text-align: left; border: 1px solid black "><%= link_to order.seller.username, order_path(order.seller)%></td>
-		</tr>
-
-	<% end %>
+		</tr>	
+	<% end %>	
 
 </table>
