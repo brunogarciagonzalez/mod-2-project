@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+
+  root to: "listings#index"
+  get '/login', to: 'sessions#new'
+  post '/signin', to: 'sessions#signin'
   resources :wallets
   resources :listings
   resources :orders
