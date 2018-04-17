@@ -3,12 +3,15 @@ class User < ApplicationRecord
   has_secure_password
   #### associations ####
   has_one :wallet
-  has_many :listings, foreign_key: 'seller_id'
   has_many :orders, foreign_key: 'buyer_id'
   # has_many :orders, through: :listings, foreign_key: 'seller_id'
-  has_many :customer_orders, :foreign_key => 'seller_id', :class_name => "Order", through: :listings
+
+
   # ==== as a seller:
-  has_many :buyers, through: :orders, foreign_key: 'buyer_id'
+  has_many :listings, foreign_key: 'seller_id'
+  has_many :customer_orders,  through: :listings, :class_name => "Order"
+  has_many :buyers, through: :customer_orders, foreign_key: 'buyer_id', :class_name =>"User"
+
   # ==== as a buyer:
   has_many :sellers, through: :listings, foreign_key: 'seller_id'
 
