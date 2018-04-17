@@ -1,0 +1,5 @@
+<h1>Order #<%= @order.id %></h1>
+<h5>Listing Title: <%= link_to @order.listing.title, listing_path(@order.listing) %></h5>
+<h5>Listing Price: $<%= @order.listing.price %></h5>
+<p>Sold By: <%= @order.seller.username %> (See <%= link_to "Seller Page", user_path(@order.seller)%>)</p>
+<p>Bought By: <%= @order.buyer.username %> (See <%= link_to "Buyer Page", user_path(@order.buyer)%>)</p>
