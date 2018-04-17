@@ -14,7 +14,34 @@
 			<td style="text-align: left; border: 1px solid black ">$<%= listing.price%></td>
 			<td style="text-align: center; border: 1px solid black "><img style="width: 50px; height: 50px;" src=<%= listing.image_url %>/></td>
 		</tr>
-
 	<% end %>
+</table>
 
+<h2>Wallet</h2>
+<table style="width: 60%; border: 1px solid black">
+	<tr>
+		<th style="text-align: left; border: 1px solid black ">Currency</th>
+		<th style="text-align: left; border: 1px solid black ">Address</th>
+		<th style="text-align: left; border: 1px solid black ">Balance</th>
+	</tr>
+	<tr>
+		<td style="text-align: left; border: 1px solid black ">USD</td>
+		<td style="text-align: left; border: 1px solid black "> N/A </td>
+		<td style="text-align: center; border: 1px solid black "><%= @user.wallet.usd_balance %></td>
+	</tr>
+	<tr>
+		<td style="text-align: left; border: 1px solid black ">Bitcoin</td>
+		<td style="text-align: left; border: 1px solid black "><%= @user.wallet.btc_address %></td>
+		<td style="text-align: center; border: 1px solid black "><%= @user.wallet.btc_balance %></td>
+	</tr>
+	<tr>
+		<td style="text-align: left; border: 1px solid black ">Ethereum</td>
+		<td style="text-align: left; border: 1px solid black "><%= @user.wallet.eth_address %></td>
+		<td style="text-align: center; border: 1px solid black "><%= @user.wallet.eth_balance %></td>
+	</tr>
+	<tr>
+		<td style="text-align: left; border: 1px solid black ">Litecoin</td>
+		<td style="text-align: left; border: 1px solid black "><%= @user.wallet.ltc_address %></td>
+		<td style="text-align: center; border: 1px solid black "><%= @user.wallet.ltc_balance %></td>
+	</tr>
 </table>

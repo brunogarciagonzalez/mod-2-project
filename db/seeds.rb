@@ -6,6 +6,19 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+def define_wallet
+  wallet_hash = {
+    usd_balance: 100000.00,
+    btc_address: Faker::Crypto.sha256,
+    btc_balance: 1.0,
+    eth_address: Faker::Crypto.sha256,
+    eth_balance: 2.0,
+    ltc_address: Faker::Crypto.sha256,
+    ltc_balance: 7.0
+  }
+end
+
 listings = []
 listings << listing_1 = Listing.new(
   title: "Macbook Pro",
@@ -65,3 +78,8 @@ order.buyer = user_2
 order.save
 
 listings.each{|l| l.save}
+
+User.all.each do |user|
+  user.wallet = Wallet.create(define_wallet)
+  user.save
+end
