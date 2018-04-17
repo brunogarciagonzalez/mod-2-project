@@ -1,6 +1,6 @@
 
 <h1>(Listing #<%= @listing.id %>) <%= @listing.title %></h1>
-
+<h1><%= if logged_in? then current_user.username end%></h1>
 <div>
 	<h3>Sold By: <%= link_to @listing.seller.username, user_path(@listing.seller) %></h3>
 	<img style="width: 40%; align-text: left;" src="<%= @listing.image_url %>">
