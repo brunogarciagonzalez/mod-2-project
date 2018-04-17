@@ -5,7 +5,8 @@ class User < ApplicationRecord
   has_one :wallet
   has_many :listings, foreign_key: 'seller_id'
   has_many :orders, foreign_key: 'buyer_id'
-  has_many :orders, through: :listings, foreign_key: 'seller_id'
+  # has_many :orders, through: :listings, foreign_key: 'seller_id'
+  has_many :customer_orders, :foreign_key => 'seller_id', :class_name => "Order", through: :listings
   # ==== as a seller:
   has_many :buyers, through: :orders, foreign_key: 'buyer_id'
   # ==== as a buyer:
