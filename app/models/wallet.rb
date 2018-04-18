@@ -5,11 +5,11 @@ class Wallet < ApplicationRecord
   	wallet_hash = {	
 		usd_balance: 100000.00,
 	    btc_address: Faker::Crypto.sha256,
-	    btc_balance: 1.0,
+	    btc_balance: 10.0,
 	    eth_address: Faker::Crypto.sha256,
-	    eth_balance: 2.0,
+	    eth_balance: 20.0,
 	    ltc_address: Faker::Crypto.sha256,
-	    ltc_balance: 7.0
+	    ltc_balance: 70.0
   	}
   end
 

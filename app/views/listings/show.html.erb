@@ -13,7 +13,7 @@
 	<img style="width: 40%; align-text: left;" src="<%= @listing.image_url %>">
 	<h3>Description</h3>
 	<p><%= @listing.description %></p>
-	<h3>Price: $<%= @listing.price.round(2, :truncate).to_f %></h3>
+	<h3>Price: <%= "#{@listing.price.round(2, :truncate).to_f}  #{@listing.currency}" %></h3>
 
 </div>
 
