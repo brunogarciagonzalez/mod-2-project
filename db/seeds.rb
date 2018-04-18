@@ -24,6 +24,7 @@ listings << listing_1 = Listing.new(
   title: "Macbook Pro",
   description: "We're so brave",
   price: 100000.00,
+  stock_quantity: 10,
   image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
 )
 
@@ -31,6 +32,7 @@ listings << listing_2 = Listing.new(
   title: "HP Envy",
   description: "Windows best",
   price: 90000.00,
+  stock_quantity: 10,
   image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
 )
 
@@ -38,18 +40,21 @@ listings << listing_3 = Listing.new(
   title: "Razer Blade",
   description: "Ultimate thin and light gaming",
   price: 120000.00,
+  stock_quantity: 10,
   image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
 )
 listings << listing_4 = Listing.new(
   title: "eMachines",
   description: "old, sold as is",
   price: 1000.00,
+  stock_quantity: 10,
   image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
 )
 listings << listing_5 = Listing.new(
   title: "MSI GS65VR",
   description: "1070 max q",
   price: 120000.00,
+  stock_quantity: 10,
   image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
 )
 

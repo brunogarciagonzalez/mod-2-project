@@ -2,6 +2,14 @@
 <h1>(Listing #<%= @listing.id %>) <%= @listing.title %></h1>
 <div>
 	<h3>Sold By: <%= link_to @listing.seller.username, user_path(@listing.seller) %></h3>
+
+	<% if @order.errors.any? %>
+		<% @order.errors.full_messages.each do |msg| %>
+			<h3 style="color: red;"> <%= msg %> </h3>
+		<% end %>
+	<% end %>
+
+
 	<img style="width: 40%; align-text: left;" src="<%= @listing.image_url %>">
 	<h3>Description</h3>
 	<p><%= @listing.description %></p>
@@ -10,14 +18,25 @@
 </div>
 
 <% if logged_in? %>
-	# we may need an action in the listing controller that accepts this form & associated logic
 
-	<h3>Place Order: </h3>
-	<%= form_for(@order) do |f| %>
-		<input type="hidden" name="order[listing_id]" value="<%= @listing.id %>" />
-		<%= f.label :quantity %>
-		<%=	f.select :quantity, options_for_select(1..50) %>
-		<%= f.submit "Order" %>
-
+	<% if (@listing.stock_quantity <= 15) && (@listing.stock_quantity > 0) %>
+		<ul>
+			<li style="color: red">Only <%= @listing.stock_quantity %> left in stock!</li>
+		</ul>
+	<% elsif @listing.stock_quantity == 0 %>
+		<ul>
+			<li style="color: red">Out of stock!</li>
+		</ul>
 	<% end %>
+
+	<% if @listing.stock_quantity > 0 %>
+		<h3>Place Order: </h3>
+		<%= form_for(@order) do |f| %>
+			<input type="hidden" name="order[listing_id]" value="<%= @listing.id %>" />
+			<%= f.label :quantity %>
+			<%=	f.select :quantity, options_for_select(1..20) %>
+			<%= f.submit "Order" %>
+		<% end %>
+	<% end %>
+
 <% end %>

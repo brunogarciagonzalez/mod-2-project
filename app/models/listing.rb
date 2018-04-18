@@ -8,6 +8,9 @@ class Listing < ApplicationRecord
   validates :description, presence: true
   validates :price, presence: true
   validates :image_url, presence: true
+  validates :stock_quantity, presence: true
+  validates :stock_quantity, numericality: { greater_than: 0 }
+  # validates_numericality_of :stock_quantity
 
   def seller=(seller_id_str)
   	self.seller_id = seller_id_str.to_i

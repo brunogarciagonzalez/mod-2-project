@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mod2Project</title>
+    <title>CryptoZone</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -16,6 +16,7 @@
     <div style="display: inline-block; float:right">
   	<%= logged_in? ? link_to("Sign Out", '/signout') : link_to("Sign In", '/signin') %>
     <%= if !logged_in? then link_to("Create New Account", '/register') end%>
+    <%= if logged_in? then link_to("Your Dashboard", user_path(current_user)) end %>
     </div>
     <br />
     
