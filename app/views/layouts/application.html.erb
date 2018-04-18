@@ -1,25 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>CryptoZone</title>
     <%= csrf_meta_tags %>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-  	<%= link_to "Listings Index", listings_path %>
-  	<%= link_to "Users Index", users_path %>
-    <%= link_to "Orders Index", orders_path %>
+    <div id="layout_nav">
+    	<%= link_to "Listings Index", listings_path %>
+    	<%= link_to "Users Index", users_path %>
+      <%= link_to "Orders Index", orders_path %>
 
-    <div style="display: inline-block; float:right">
-  	<%= logged_in? ? link_to("Sign Out", '/signout') : link_to("Sign In", '/signin') %>
-    <%= if !logged_in? then link_to("Create New Account", '/register') end%>
-    <%= if logged_in? then link_to("Your Dashboard", user_path(current_user)) end %>
+      <div style="display: inline-block; float:right">
+    	<%= logged_in? ? link_to("Sign Out", '/signout') : link_to("Sign In", '/signin') %>
+      <%= if !logged_in? then link_to("Create New Account", '/register') end%>
+      <%= if logged_in? then link_to("Your Dashboard", user_path(current_user)) end %>
+      </div>
+      <br />
     </div>
-    <br />
-    
+
     <%= yield %>
+
+
   </body>
 </html>

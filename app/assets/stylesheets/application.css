@@ -17,3 +17,12 @@
 .error {
 	background-color: red;
 }
+
+#layout_nav {
+	border-bottom: 2px solid grey;
+}
+
+/* heroic-features.css */
+body {
+  padding: 10px;
+}
