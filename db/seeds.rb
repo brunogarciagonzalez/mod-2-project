@@ -79,6 +79,10 @@ user_3 = User.create(
   password: "Macbooks1234",
   email: "student@flatironschool.com"
 )
+User.all.each do |user|
+  user.wallet = Wallet.create(Wallet.default_wallet_hash)
+  user.save
+end
 
 order = Order.new()
 order.listing = listing_1
@@ -87,7 +91,3 @@ order.save
 
 listings.each{|l| l.save}
 
-User.all.each do |user|
-  user.wallet = Wallet.create(Wallet.default_wallet_hash)
-  user.save
-end
