@@ -12,9 +12,14 @@
   	<%= link_to "Listings Index", listings_path %>
   	<%= link_to "Users Index", users_path %>
     <%= link_to "Orders Index", orders_path %>
-  	<%= logged_in? ? link_to("Sign Out", '/logout') : link_to("Sign In", '/login') %>
+
+    <div style="display: inline-block; float:right">
+  	<%= logged_in? ? link_to("Sign Out", '/signout') : link_to("Sign In", '/signin') %>
+    <%= if !logged_in? then link_to("Create New Account", '/register') end%>
     <%= if logged_in? then link_to("Your Dashboard", user_path(current_user)) end %>
+    </div>
     <br />
+    
     <%= yield %>
   </body>
 </html>

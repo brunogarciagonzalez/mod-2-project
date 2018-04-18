@@ -7,17 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-def define_wallet
-  wallet_hash = {
-    usd_balance: 100000.00,
-    btc_address: Faker::Crypto.sha256,
-    btc_balance: 1.0,
-    eth_address: Faker::Crypto.sha256,
-    eth_balance: 2.0,
-    ltc_address: Faker::Crypto.sha256,
-    ltc_balance: 7.0
-  }
-end
+# def define_wallet
+#   wallet_hash = {
+#     usd_balance: 100000.00,
+#     btc_address: Faker::Crypto.sha256,
+#     btc_balance: 1.0,
+#     eth_address: Faker::Crypto.sha256,
+#     eth_balance: 2.0,
+#     ltc_address: Faker::Crypto.sha256,
+#     ltc_balance: 7.0
+#   }
+# end
 
 listings = []
 listings << listing_1 = Listing.new(
@@ -61,12 +61,12 @@ listings << listing_5 = Listing.new(
 
 
 user_1 = User.create(
-  username: "Steve Jobs",
+  username: "Steve_Jobs",
   password: "Apple1234",
   email: "steve@apple.com"
 )
 user_2 = User.create(
-  username: "Bill Gates",
+  username: "Bill_Gates",
   password: "Microsoft1234",
   email: "bill@microsoft.com"
 )
@@ -75,7 +75,7 @@ user_1.listings << [listing_1, listing_2]
 user_2.listings << [listing_3, listing_4, listing_5]
 
 user_3 = User.create(
-  username: "Flatiron Student",
+  username: "Flatiron_Student",
   password: "Macbooks1234",
   email: "student@flatironschool.com"
 )
@@ -88,6 +88,6 @@ order.save
 listings.each{|l| l.save}
 
 User.all.each do |user|
-  user.wallet = Wallet.create(define_wallet)
+  user.wallet = Wallet.create(Wallet.default_wallet_hash)
   user.save
 end
