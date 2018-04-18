@@ -1,6 +1,14 @@
-<h1>CryptoZone</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
-
+<h1>Welcome to CryptoZone</h1>
+<% if @user.errors.any? %>
+	<div>
+		<h2>Errors:</h2>
+		<ol>
+			<% @user.errors.full_messages.each do |message| %>
+			<li> <%= message %></li>
+			<%end%>
+		</ol>
+	</div>
+<% end %>
 
 <h1>Log in</h1>
 

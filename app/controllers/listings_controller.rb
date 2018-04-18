@@ -3,6 +3,7 @@ class ListingsController < ApplicationController
 	#Create
 	def new
 		@listing = Listing.new
+		@currency = ["BTC", "LTC", "ETH", "USD"]
 	end
 
 	def create
@@ -11,6 +12,7 @@ class ListingsController < ApplicationController
 			@listing.save
 			redirect_to listing_path(@listing)
 		else
+			@currency = ["BTC", "LTC", "ETH", "USD"]
 			render :new
 		end
 	end
@@ -45,7 +47,10 @@ class ListingsController < ApplicationController
 	end
 
 	def listing_params
-		params.require(:listing).permit(:title, :description, :price, :image_url, :seller, :stock_quantity)
+		params.require(:listing).permit(:title, :description, 
+										:price, :image_url,
+									    :seller, :stock_quantity,
+									    :currency)
 	end
 
 
