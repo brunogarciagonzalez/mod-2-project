@@ -3,17 +3,17 @@ class User < ApplicationRecord
   has_secure_password
   #### associations ####
   has_one :wallet
-  has_many :orders, foreign_key: 'buyer_id'
   # has_many :orders, through: :listings, foreign_key: 'seller_id'
 
 
   # ==== as a seller:
   has_many :listings, foreign_key: 'seller_id'
-  has_many :customer_orders,  through: :listings, :class_name => "Order"
-  has_many :buyers, through: :customer_orders, foreign_key: 'buyer_id', :class_name =>"User"
+  has_many :customer_orders, through: :listings, foreign_key: 'buyer_id', class_name: 'Order'
+  # has_many :buyers, through: :customer_orders, foreign_key: 'buyer_id', :class_name =>"User"
 
   # ==== as a buyer:
-  has_many :sellers, through: :listings, foreign_key: 'seller_id'
+  # has_many :sellers, through: :listings, foreign_key: 'seller_id'
+  has_many :orders, foreign_key: 'buyer_id'
 
   #### validations ####
   validates :username, presence: true
@@ -21,6 +21,10 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :email, uniqueness: true
   validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+
+
+
+
   # validates :password, length: {minimum: 8}
   # validate :has_uppercase_letters?
   # validate :has_digits?

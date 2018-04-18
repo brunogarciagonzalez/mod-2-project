@@ -1,6 +1,7 @@
 class Listing < ApplicationRecord
   belongs_to :seller, class_name: "User"
   has_many :orders
+  has_many :customer_orders, class_name: 'Order'
   #### validations ####
   validates :seller_id, presence: true
   validates :title, presence: true
