@@ -12,35 +12,54 @@
 		<th style="text-align: left; border: 1px solid black ">Listing Title</th>
 		<th style="text-align: left; border: 1px solid black ">Price</th>
 		<th style="text-align: left; border: 1px solid black ">Image</th>
+		<% if logged_in? && (current_user.id == @user.id) %>
+			<th style="text-align: left; border: 1px solid black ">Stock Left</th>
+		<% end %>
 	</tr>
 	<% @user.listings.each do |listing| %>
 		<tr>
 			<td style="text-align: left; border: 1px solid black "><%= link_to listing.title, listing_path(listing)%></td>
 			<td style="text-align: left; border: 1px solid black ">$<%= listing.price%></td>
 			<td style="text-align: center; border: 1px solid black "><img style="width: 50px; height: 50px;" src=<%= listing.image_url %>/></td>
+			<% if logged_in? && (current_user.id == @user.id) %>
+				<td style="text-align: left; border: 1px solid black "><%= listing.stock_quantity %></td>
+			<% end %>
 		</tr>
 	<% end %>
 </table>
 
 
 <% if logged_in? && (current_user.id == @user.id) %>
-	<h2>Your Order History</h2>
+	<h2>Your Selling-Order History</h2>
 	<table style="width: 60%; border: 1px solid black">
 		<tr>
 			<th style="text-align: left; border: 1px solid black ">Order Id</th>
 			<th style="text-align: left; border: 1px solid black ">Listing Title</th>
 			<th style="text-align: left; border: 1px solid black ">Buyer</th>
+		</tr>
+		<% @user.customer_orders.each do |order| %>
+			<tr>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.id, order_path(order) %></td>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.buyer.username, user_path(order.buyer)%></td>
+			</tr>
+		<% end %>
+	</table>
+
+	<h2>Your Buying-Order History</h2>
+	<table style="width: 60%; border: 1px solid black">
+		<tr>
+			<th style="text-align: left; border: 1px solid black ">Order Id</th>
+			<th style="text-align: left; border: 1px solid black ">Listing Title</th>
 			<th style="text-align: left; border: 1px solid black ">Seller</th>
 		</tr>
 		<% @user.orders.each do |order| %>
 			<tr>
 				<td style="text-align: left; border: 1px solid black "><%= link_to order.id, order_path(order) %></td>
 				<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
-				<td style="text-align: left; border: 1px solid black "><%= link_to order.buyer.username, user_path(order.buyer)%></td>
 				<td style="text-align: left; border: 1px solid black "><%= link_to order.seller.username, order_path(order.seller)%></td>
 			</tr>
 		<% end %>
-
 	</table>
 
 	<!-- ############################# -->

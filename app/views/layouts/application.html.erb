@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mod2Project</title>
+    <title>CryptoZone</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -13,6 +13,7 @@
   	<%= link_to "Users Index", users_path %>
     <%= link_to "Orders Index", orders_path %>
   	<%= logged_in? ? link_to("Sign Out", '/logout') : link_to("Sign In", '/login') %>
+    <%= if logged_in? then link_to("Your Dashboard", user_path(current_user)) end %>
     <br />
     <%= yield %>
   </body>
