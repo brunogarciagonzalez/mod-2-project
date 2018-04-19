@@ -1,7 +1,7 @@
 
 <h1>(Listing #<%= @listing.id %>) <%= @listing.title %></h1>
 <div>
-	<h3>Sold By: <%= link_to @listing.seller.username, user_path(@listing.seller) %></h3>
+	<h3>Sold By: <%= link_to @listing.seller.username, user_path(@listing.seller) %> <%= if current_user == @listing.seller then "(You)" end %></h3>
 
 	<% if @order.errors.any? %>
 		<% @order.errors.full_messages.each do |msg| %>
@@ -26,26 +26,31 @@
 <% if logged_in? %>
 
 	<% if @listing.active %>
-		<% if (@listing.stock_quantity <= 15) && (@listing.stock_quantity > 0) %>
-			<ul>
-				<li style="color: red">Only <%= @listing.stock_quantity %> left in stock!</li>
-			</ul>
-		<% elsif @listing.stock_quantity == 0 %>
-			<ul>
-				<li style="color: red">Out of stock!</li>
-			</ul>
-		<% end %>
-
-		<% if @listing.stock_quantity > 0 %>
-			<h3>Place Order: </h3>
-			<%= form_for(@order) do |f| %>
-				<input type="hidden" name="order[listing_id]" value="<%= @listing.id %>" />
-				<input type="hidden" name="order[currency]" value="<%= @listing.currency %>" />
-				<%= f.label :quantity %>
-				<%=	f.select :quantity, options_for_select(1..20) %>
-				<%= f.submit "Order" %>
+			<% if (@listing.stock_quantity <= 15) && (@listing.stock_quantity > 0) %>
+				<ul>
+					<li style="color: red">Only <%= @listing.stock_quantity %> left in stock!</li>
+				</ul>
+			<% elsif @listing.stock_quantity == 0 %>
+				<ul>
+					<li style="color: red">Out of stock!</li>
+				</ul>
 			<% end %>
-		<% end %>
+
+			<% if current_user != @listing.seller %>
+				<% if @listing.stock_quantity > 0 %>
+					<h3>Place Order: </h3>
+					<%= form_for(@order) do |f| %>
+						<input type="hidden" name="order[listing_id]" value="<%= @listing.id %>" />
+						<input type="hidden" name="order[currency]" value="<%= @listing.currency %>" />
+						<%= f.label :quantity %>
+						<%=	f.select :quantity, options_for_select(1..20) %>
+						<%= f.submit "Order" %>
+					<% end %>
+				<% end %>
+			<% end %>
 	<% end %>
 
+	<% if current_user == @listing.seller %>
+		<%= link_to "Edit This Listing", "#{listing_path(@listing)}/edit" %>
+	<% end %>
 <% end %>
