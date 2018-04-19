@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :reviews
   root to: "listings#index"
   get '/signin', to: 'sessions#new'
   get '/signout', to: 'sessions#signout'
