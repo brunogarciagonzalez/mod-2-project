@@ -25,6 +25,6 @@
   	<%= f.text_field :image_url %><br>
 
   	<input type="hidden" name="listing[seller]" value="<%= current_user.id %>" />
-    <%= f.submit "Edit Listing" %>
+    <%= f.submit "Edit Listing" %> <%= link_to "Cancel", "#{listing_path(@listing)}" %>
   <% end %>
 <% end %>
