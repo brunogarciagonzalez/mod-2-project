@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   #### validations ####
   validates :username, presence: true
-  validates_uniqueness_of :username, :case_sensitive => false 
+  validates_uniqueness_of :username, :case_sensitive => false
   validates :username, format: { without: /\s/ }
 
   validates :email, presence: true
@@ -25,8 +25,21 @@ class User < ApplicationRecord
   validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   validates :password, length: { minimum: 8 }
 
+  def active_listings_count
+    self.listings.select { |listing| listing.active }.count
+  end
 
+  def inactive_listings_count
+    self.listings.select { |listing| !listing.active }.count
+  end
 
+  def sell_orders_count
+    self.customer_orders.count
+  end
+
+  def buy_orders_count
+    self.orders.count
+  end
 
   # validates :password, length: {minimum: 8}
   # validate :has_uppercase_letters?
