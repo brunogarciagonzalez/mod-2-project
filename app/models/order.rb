@@ -14,9 +14,7 @@ class Order < ApplicationRecord
     self.listing.save
 
     #access buyer wallet balance for specific currency
-    binding.pry
     self.access_buyer_wallet_of_order_currency -= self.total_price
-    binding.pry
     self.buyer.wallet.save
 
     #access seller wallet balance for specific currency
