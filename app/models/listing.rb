@@ -15,4 +15,13 @@ class Listing < ApplicationRecord
   def seller=(seller_id_str)
   	self.seller_id = seller_id_str.to_i
   end
+
+  def toggle_active
+    if self.active
+      self.active = false
+    else
+      self.active = true
+    end
+  end
+  
 end
