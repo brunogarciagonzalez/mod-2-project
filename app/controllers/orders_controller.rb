@@ -9,12 +9,11 @@ class OrdersController < ApplicationController
 	def create
 		@order = Order.new(listing_id: order_params[:listing_id], quantity: order_params[:quantity], buyer_id: session[:user_id])
 		if @order.save
-			@order.listing.stock_quantity -= @order.quantity
-			@order.listing.save
-			@order.buyer.wallet.usd_balance -= @order.total_price
-			@order.buyer.wallet.save
-			@order.seller.wallet.usd_balance += @order.total_price
-			@order.seller.wallet.save
+			@order.transaction
+			if @order.listing.stock_quantity == 0
+				@order.listing.toggle_active
+				@order.listing.save
+			end
 			redirect_to order_path(@order)
 		else
 			@listing = Listing.find(@order.listing.id)

@@ -1,86 +1,113 @@
-<h1>Username: <%= @user.username %></h1>
+<% if logged_in? && (current_user.id == @user.id) %>
+	<h1>Your Dashboard</h1>
+	<h3>Username: <%= @user.username %></h3>
+<% else %>
+	<h1>Username: <%= @user.username %></h1>
+<% end %>
+
 <h3>User ID: <%= @user.id %></h3>
 <h3>Contact: <a href="mailto:<%= @user.email %>"><%= @user.email %></a></h3>
 
 <% if logged_in? && (current_user.id == @user.id) %>
 
-	<h2>Your Active Listings</h2>
+	<h2>Listings</h2>
+
+	<% if (@user.inactive_listings_count == 0) && (@user.active_listings_count == 0) %>
+		<h5>You Have No Listings</h5>
+	<% end %>
+
 	<h5><%= link_to "Create New Listing", '/listings/new' %></h5>
-	<table style="width: 60%; border: 1px solid black">
-		<tr>
-			<th style="text-align: left; border: 1px solid black ">Listing Title</th>
-			<th style="text-align: left; border: 1px solid black ">Price</th>
-			<th style="text-align: left; border: 1px solid black ">Image</th>
-			<th style="text-align: left; border: 1px solid black ">Stock Left</th>
-			<th style="text-align: left; border: 1px solid black ">Status</th>
-		</tr>
-		<% @user.listings.each do |listing| %>
-			<% if listing.active %>
-				<tr>
-					<td style="text-align: left; border: 1px solid black "><%= link_to listing.title, listing_path(listing)%></td>
-					<td style="text-align: left; border: 1px solid black "><%= listing.price%> <%= listing.currency %></td>
-					<td style="text-align: center; border: 1px solid black "><img style="width: 50px; height: 50px;" src=<%= listing.image_url %>/></td>
-					<td style="text-align: left; border: 1px solid black "><%= listing.stock_quantity %></td>
-					<td style="text-align: left; border: 1px solid black "><%= if listing.active then "Active" else "Inactive" end %>  <%= link_to "(Deactivate)", listing, method: :delete, data: {confirm: "Are You Sure?"} %> </td>
-				</tr>
+
+	<% if @user.active_listings_count > 0 %>
+		<h3>Your Active Listings</h3>
+		<table style="width: 60%; border: 1px solid black">
+			<tr>
+				<th style="text-align: left; border: 1px solid black ">Listing Title</th>
+				<th style="text-align: left; border: 1px solid black ">Price</th>
+				<th style="text-align: left; border: 1px solid black ">Image</th>
+				<th style="text-align: left; border: 1px solid black ">Stock Left</th>
+				<th style="text-align: left; border: 1px solid black ">Status</th>
+			</tr>
+			<% @user.listings.each do |listing| %>
+				<% if listing.active %>
+					<tr>
+						<td style="text-align: left; border: 1px solid black "><%= link_to listing.title, listing_path(listing)%></td>
+						<td style="text-align: left; border: 1px solid black "><%= listing.price%> <%= listing.currency %></td>
+						<td style="text-align: center; border: 1px solid black "><img style="width: 50px; height: 50px;" src=<%= listing.image_url %>/></td>
+						<td style="text-align: left; border: 1px solid black "><%= listing.stock_quantity %></td>
+						<td style="text-align: left; border: 1px solid black "><%= if listing.active then "Active" else "Inactive" end %>  <%= link_to "(Deactivate)", listing, method: :delete, data: {confirm: "Are You Sure?"} %> </td>
+					</tr>
+				<% end %>
 			<% end %>
-		<% end %>
-	</table>
+		</table>
+	<% end %>
 
-	<h2>Your Inactive Listings</h2>
-	<table style="width: 60%; border: 1px solid black">
-		<tr>
-			<th style="text-align: left; border: 1px solid black ">Listing Title</th>
-			<th style="text-align: left; border: 1px solid black ">Price</th>
-			<th style="text-align: left; border: 1px solid black ">Image</th>
-			<th style="text-align: left; border: 1px solid black ">Stock Left</th>
-			<th style="text-align: left; border: 1px solid black ">Status</th>
-		</tr>
-		<% @user.listings.each do |listing| %>
-			<% if !listing.active %>
-				<tr>
-					<td style="text-align: left; border: 1px solid black "><%= link_to listing.title, listing_path(listing)%></td>
-					<td style="text-align: left; border: 1px solid black "><%= listing.price%> <%= listing.currency %></td>
-					<td style="text-align: center; border: 1px solid black "><img style="width: 50px; height: 50px;" src=<%= listing.image_url %>/></td>
-					<td style="text-align: left; border: 1px solid black "><%= listing.stock_quantity %></td>
-					<td style="text-align: left; border: 1px solid black "><%= if listing.active then "Active" else "Inactive" end %>  <%= link_to "(Activate)", listing, method: :delete, data: {confirm: "Are You Sure?"} %> </td>
-				</tr>
+	<% if @user.inactive_listings_count > 0 %>
+		<h3>Your Inactive Listings</h3>
+		<table style="width: 60%; border: 1px solid black">
+			<tr>
+				<th style="text-align: left; border: 1px solid black ">Listing Title</th>
+				<th style="text-align: left; border: 1px solid black ">Price</th>
+				<th style="text-align: left; border: 1px solid black ">Image</th>
+				<th style="text-align: left; border: 1px solid black ">Stock Left</th>
+				<th style="text-align: left; border: 1px solid black ">Status</th>
+			</tr>
+			<% @user.listings.each do |listing| %>
+				<% if !listing.active %>
+					<tr>
+						<td style="text-align: left; border: 1px solid black "><%= link_to listing.title, listing_path(listing)%></td>
+						<td style="text-align: left; border: 1px solid black "><%= listing.price%> <%= listing.currency %></td>
+						<td style="text-align: center; border: 1px solid black "><img style="width: 50px; height: 50px;" src=<%= listing.image_url %>/></td>
+						<td style="text-align: left; border: 1px solid black "><%= listing.stock_quantity %></td>
+						<td style="text-align: left; border: 1px solid black "><%= if listing.active then "Active" else "Inactive" end %>  <%= link_to "(Activate)", listing, method: :delete, data: {confirm: "Are You Sure?"} %> </td>
+					</tr>
+				<% end %>
 			<% end %>
-		<% end %>
-	</table>
+		</table>
+	<% end %>
 
-	<h2>Your Selling-Order History</h2>
-	<table style="width: 60%; border: 1px solid black">
-		<tr>
-			<th style="text-align: left; border: 1px solid black ">Order Id</th>
-			<th style="text-align: left; border: 1px solid black ">Listing Title</th>
-			<th style="text-align: left; border: 1px solid black ">Buyer</th>
-		</tr>
-		<% @user.customer_orders.each do |order| %>
-		<tr>
-			<td style="text-align: left; border: 1px solid black "><%= link_to order.id, order_path(order) %></td>
-			<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
-			<td style="text-align: left; border: 1px solid black "><%= link_to order.buyer.username, user_path(order.buyer)%></td>
-		</tr>
-		<% end %>
-	</table>
+	<h2>Order History</h2>
+	<h5><%= link_to "Go To All CryptoZone Listings", '/listings' %></h5>
 
-	<h2>Your Buying-Order History</h2>
-	<table style="width: 60%; border: 1px solid black">
-		<tr>
-			<th style="text-align: left; border: 1px solid black ">Order Id</th>
-			<th style="text-align: left; border: 1px solid black ">Listing Title</th>
-			<th style="text-align: left; border: 1px solid black ">Seller</th>
-		</tr>
-		<% @user.orders.each do |order| %>
-		<tr>
-			<td style="text-align: left; border: 1px solid black "><%= link_to order.id, order_path(order) %></td>
-			<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
-			<td style="text-align: left; border: 1px solid black "><%= link_to order.seller.username, order_path(order.seller)%></td>
-		</tr>
-		<% end %>
-	</table>
+	<% if @user.sell_orders_count > 0 %>
+		<h2>Your Sell-Order History</h2>
+		<table style="width: 60%; border: 1px solid black">
+			<tr>
+				<th style="text-align: left; border: 1px solid black ">Order Id</th>
+				<th style="text-align: left; border: 1px solid black ">Listing Title</th>
+				<th style="text-align: left; border: 1px solid black ">Buyer</th>
+			</tr>
+			<% @user.customer_orders.each do |order| %>
+			<tr>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.id, order_path(order) %></td>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.buyer.username, user_path(order.buyer)%></td>
+			</tr>
+			<% end %>
+		</table>
+	<% end %>
 
+	<% if @user.buy_orders_count > 0 %>
+		<h2>Your Buy-Order History</h2>
+		<table style="width: 60%; border: 1px solid black">
+			<tr>
+				<th style="text-align: left; border: 1px solid black ">Order Id</th>
+				<th style="text-align: left; border: 1px solid black ">Listing Title</th>
+				<th style="text-align: left; border: 1px solid black ">Seller</th>
+			</tr>
+			<% @user.orders.each do |order| %>
+			<tr>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.id, order_path(order) %></td>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
+				<td style="text-align: left; border: 1px solid black "><%= link_to order.seller.username, order_path(order.seller)%></td>
+			</tr>
+			<% end %>
+		</table>
+	<% end %>
+
+	<% if (@user.sell_orders_count == 0) && (@user.buy_orders_count == 0) %>
+		<h5>You Have Made No Orders</h5>
+	<% end %>
 	<!-- ############################# -->
 
 	<h2>Your Wallet</h2>

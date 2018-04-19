@@ -14,7 +14,7 @@ class Listing < ApplicationRecord
   validates :price, presence: true
   validates :image_url, presence: true
   validates :stock_quantity, presence: true
-  validates :stock_quantity, numericality: { greater_than: 0 }
+  validates :stock_quantity, numericality: { greater_than_or_equal_to: 0 }
   # validates_numericality_of :stock_quantity
 
   def seller=(seller_id_str)
@@ -28,7 +28,7 @@ class Listing < ApplicationRecord
       self.active = true
     end
   end
-
+  
   def listing_review_stars
     flag = average_rating
     case flag.to_i
@@ -55,5 +55,5 @@ class Listing < ApplicationRecord
       'N/A'
     end
   end
-  
+
 end
