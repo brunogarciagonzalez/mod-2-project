@@ -2,6 +2,11 @@ class Listing < ApplicationRecord
   belongs_to :seller, class_name: "User"
   has_many :orders
   has_many :customer_orders, class_name: 'Order'
+
+
+  has_many :reviews, through: :orders
+
+
   #### validations ####
   validates :seller_id, presence: true
   validates :title, presence: true
@@ -21,6 +26,33 @@ class Listing < ApplicationRecord
       self.active = false
     else
       self.active = true
+    end
+  end
+  
+  def listing_review_stars
+    flag = average_rating
+    case flag.to_i
+    when 1
+      '★'
+    when 2
+      '★★'
+    when 3
+      '★★★'
+    when 4
+      '★★★★'
+    when 5
+      '★★★★★'
+    else
+      'No Reviews Yet!'
+    end
+  end
+
+  def average_rating
+    if !self.reviews.empty?
+      reviews_arr = self.reviews.map{|r| r.rating}
+      reviews_arr.inject{ |sum, el| sum + el }.to_f / reviews_arr.size
+    else 
+      'N/A'
     end
   end
 

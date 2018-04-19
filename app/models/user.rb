@@ -14,6 +14,7 @@ class User < ApplicationRecord
   # ==== as a buyer:
   # has_many :sellers, through: :listings, foreign_key: 'seller_id'
   has_many :orders, foreign_key: 'buyer_id'
+  has_many :reviews, through: :orders, foreign_key: 'buyer_id'
 
   #### validations ####
   validates :username, presence: true

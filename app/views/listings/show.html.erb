@@ -24,7 +24,6 @@
 </div>
 
 <% if logged_in? %>
-
 	<% if @listing.active %>
 			<% if (@listing.stock_quantity <= 15) && (@listing.stock_quantity > 0) %>
 				<ul>
@@ -54,3 +53,24 @@
 		<%= link_to "Edit This Listing", "#{listing_path(@listing)}/edit" %>
 	<% end %>
 <% end %>
+        
+<h2>Reviews</h2>
+<h4>Average Rating: <%= @listing.listing_review_stars %> (<%= @listing.average_rating%>)</h4>
+<% if @listing.reviews.any? %>
+	<table style="width: 60%; border: 1px solid black">
+	<tr>
+		<th style="text-align: left; border: 1px solid black ">Reviewer</th>
+		<th style="text-align: left; border: 1px solid black ">Rating</th>
+		<th style="text-align: left; border: 1px solid black ">Message</th>
+	</tr>
+	<% @listing.reviews.each do |review| %>
+	<tr>
+		<td style="text-align: left; border: 1px solid black "> <%= link_to review.buyer.username, user_path(review.buyer)%></td>
+		<td style="text-align: left; border: 1px solid black "><%= review.star_image %> (<%=review.rating%>) </td>
+		<td style="text-align: left; border: 1px solid black "><%= review.content %></td>
+	</tr>
+	<% end %>	
+<% else %>
+	<h3>No reviews yet!</h3>
+<% end %>
+

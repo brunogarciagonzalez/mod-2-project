@@ -101,9 +101,32 @@ User.all.each do |user|
   user.save
 end
 
+# Bill gates buys Macbook Pro from Steve Jobs
 order = Order.new()
 order.listing = listing_1
 order.buyer = user_2
 order.save
 
+#Flatiron student buys Macbook Pro from Steve Jobs
+order_2 = Order.new()
+order_2.listing = listing_1
+order_2.buyer = user_3
+order_2.save
+
 listings.each{|l| l.save}
+
+#Bill Gates reviews Macbook Pro order from Steve Jobs
+review = Review.new(content: "Apple sucks, buy Microsoft", rating: 1.0)
+review.order = order
+review.save
+
+#Flatiron Student reviews Macbook Pro order from Steve Jobs
+review_2 = Review.new(content: "I feel so BRAVE nao!", rating: 4.0)
+review_2.order = order_2
+review_2.save
+
+
+
+
+
+

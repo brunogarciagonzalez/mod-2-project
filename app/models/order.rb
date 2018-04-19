@@ -2,8 +2,11 @@ class Order < ApplicationRecord
   #### associations ####
   belongs_to :listing
   belongs_to :buyer, class_name: "User"
-  # ====================================
   has_one :seller, through: :listing
+
+  has_one :review
+  
+
   #### validations ####
   validate :quantity_error_check
   validate :wallet_error_check
