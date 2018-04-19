@@ -29,11 +29,21 @@ class ListingsController < ApplicationController
 	#Update
 
 	def edit
-
+		# populated via :set_listing
+		@currency = ["BTC", "LTC", "ETH", "USD"]
 	end
 
 	def update
-
+		@listing = Listing.new(listing_params)
+		# need to update
+		if @listing.valid?
+			@listing = Listing.find(params[:id])
+			@listing.update(listing_params)
+			redirect_to listing_path(@listing)
+		else
+			@currency = ["BTC", "LTC", "ETH", "USD"]
+			render :edit
+		end
 	end
 
 	#Destroy ==> used as active toggle

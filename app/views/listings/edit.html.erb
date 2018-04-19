@@ -1,0 +1,30 @@
+<% if logged_in? && (current_user.id == @listing.seller.id) %>
+  <h1>Edit This Listing</h1>
+
+  <% if @listing.errors.any? %>
+  	<ul>
+  		<% @listing.errors.full_messages.each do |msg| %>
+  			<li style="color: red;"> <%= msg %> </li>
+  		<% end %>
+  	</ul>
+  <% end %>
+
+  <%= form_for @listing do |f| %>
+  	<%= f.label :title %>
+  	<%= f.text_field :title %> <br>
+  	<%= f.label :description %> <br>
+  	<%= f.text_area :description %><br>
+  	<div>
+  		<%= f.label :price %>
+  		<%= f.number_field :price, step: :any %>
+  	  	<%= f.select :currency, @currency %>
+  	</div>
+  	<%= f.label :stock_quantity %>
+  	<%= f.number_field :stock_quantity %> <br>
+  	<%= f.label "Image Url" %>
+  	<%= f.text_field :image_url %><br>
+
+  	<input type="hidden" name="listing[seller]" value="<%= current_user.id %>" />
+    <%= f.submit "Edit Listing" %>
+  <% end %>
+<% end %>
