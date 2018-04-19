@@ -26,7 +26,7 @@
 				<th style="text-align: left; border: 1px solid black ">Price</th>
 				<th style="text-align: left; border: 1px solid black ">Image</th>
 				<th style="text-align: left; border: 1px solid black ">Stock Left</th>
-				<th style="text-align: left; border: 1px solid black ">Status</th>
+				<th style="text-align: left; border: 1px solid black ">Manage</th>
 			</tr>
 			<% @user.listings.each do |listing| %>
 				<% if listing.active %>
@@ -35,7 +35,7 @@
 						<td style="text-align: left; border: 1px solid black "><%= listing.price%> <%= listing.currency %></td>
 						<td style="text-align: center; border: 1px solid black "><img style="width: 50px; height: 50px;" src=<%= listing.image_url %>/></td>
 						<td style="text-align: left; border: 1px solid black "><%= listing.stock_quantity %></td>
-						<td style="text-align: left; border: 1px solid black "><%= if listing.active then "Active" else "Inactive" end %>  <%= link_to "(Deactivate)", listing, method: :delete, data: {confirm: "Are You Sure?"} %> </td>
+						<td style="text-align: left; border: 1px solid black "><%= if listing.active then "Active" else "Inactive" end %>  <%= link_to "(Deactivate)", listing, method: :delete, data: {confirm: "Are You Sure?"} %> <br> <%= link_to "Edit Listing", "#{listing_path(listing)}/edit" %></td>
 					</tr>
 				<% end %>
 			<% end %>
@@ -50,7 +50,7 @@
 				<th style="text-align: left; border: 1px solid black ">Price</th>
 				<th style="text-align: left; border: 1px solid black ">Image</th>
 				<th style="text-align: left; border: 1px solid black ">Stock Left</th>
-				<th style="text-align: left; border: 1px solid black ">Status</th>
+				<th style="text-align: left; border: 1px solid black ">Manage</th>
 			</tr>
 			<% @user.listings.each do |listing| %>
 				<% if !listing.active %>
@@ -59,7 +59,7 @@
 						<td style="text-align: left; border: 1px solid black "><%= listing.price%> <%= listing.currency %></td>
 						<td style="text-align: center; border: 1px solid black "><img style="width: 50px; height: 50px;" src=<%= listing.image_url %>/></td>
 						<td style="text-align: left; border: 1px solid black "><%= listing.stock_quantity %></td>
-						<td style="text-align: left; border: 1px solid black "><%= if listing.active then "Active" else "Inactive" end %>  <%= link_to "(Activate)", listing, method: :delete, data: {confirm: "Are You Sure?"} %> </td>
+						<td style="text-align: left; border: 1px solid black "><%= if listing.active then "Active" else "Inactive" end %>  <%= link_to "(Activate)", listing, method: :delete, data: {confirm: "Are You Sure?"} %> <br> <%= link_to "Edit Listing", "#{listing_path(listing)}/edit" %></td>
 					</tr>
 				<% end %>
 			<% end %>
