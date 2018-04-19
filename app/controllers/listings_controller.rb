@@ -34,11 +34,9 @@ class ListingsController < ApplicationController
 	end
 
 	def update
-		@listing = Listing.new(listing_params)
+		@listing = Listing.find(params[:id])
 		# need to update
-		if @listing.valid?
-			@listing = Listing.find(params[:id])
-			@listing.update(listing_params)
+		if @listing.update(listing_params)
 			redirect_to listing_path(@listing)
 		else
 			@currency = ["BTC", "LTC", "ETH", "USD"]
