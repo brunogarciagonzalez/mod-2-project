@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
        redirect_to user_path(@user)
      else
       @user = User.new()
-      @user.errors.add(:username, "Incorrect Username or Password")
+      @user.errors.add(:base, "Incorrect Username or Password")
       render :new
      end
   end
