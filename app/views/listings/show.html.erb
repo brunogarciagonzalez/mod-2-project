@@ -9,6 +9,12 @@
 		<% end %>
 	<% end %>
 
+	<% if !@listing.active %>
+		<h3 style="color: red;">While you can view this listing, it is currently inactive</h3>
+		<% if logged_in? && (current_user.id == @listing.seller.id)%>
+			<h3 style="color: red;"> (This is your listing. To activate it, go to <%= link_to "Your Dashboard", user_path(current_user) %>)<h3>
+		<% end %>
+	<% end %>
 
 	<img style="width: 40%; align-text: left;" src="<%= @listing.image_url %>">
 	<h3>Description</h3>
@@ -19,24 +25,26 @@
 
 <% if logged_in? %>
 
-	<% if (@listing.stock_quantity <= 15) && (@listing.stock_quantity > 0) %>
-		<ul>
-			<li style="color: red">Only <%= @listing.stock_quantity %> left in stock!</li>
-		</ul>
-	<% elsif @listing.stock_quantity == 0 %>
-		<ul>
-			<li style="color: red">Out of stock!</li>
-		</ul>
-	<% end %>
+	<% if @listing.active %>
+		<% if (@listing.stock_quantity <= 15) && (@listing.stock_quantity > 0) %>
+			<ul>
+				<li style="color: red">Only <%= @listing.stock_quantity %> left in stock!</li>
+			</ul>
+		<% elsif @listing.stock_quantity == 0 %>
+			<ul>
+				<li style="color: red">Out of stock!</li>
+			</ul>
+		<% end %>
 
-	<% if @listing.stock_quantity > 0 %>
-		<h3>Place Order: </h3>
-		<%= form_for(@order) do |f| %>
-			<input type="hidden" name="order[listing_id]" value="<%= @listing.id %>" />
-			<input type="hidden" name="order[currency]" value="<%= @listing.currency %>" />
-			<%= f.label :quantity %>
-			<%=	f.select :quantity, options_for_select(1..20) %>
-			<%= f.submit "Order" %>
+		<% if @listing.stock_quantity > 0 %>
+			<h3>Place Order: </h3>
+			<%= form_for(@order) do |f| %>
+				<input type="hidden" name="order[listing_id]" value="<%= @listing.id %>" />
+				<input type="hidden" name="order[currency]" value="<%= @listing.currency %>" />
+				<%= f.label :quantity %>
+				<%=	f.select :quantity, options_for_select(1..20) %>
+				<%= f.submit "Order" %>
+			<% end %>
 		<% end %>
 	<% end %>
 
