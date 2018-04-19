@@ -43,7 +43,7 @@
 						<input type="hidden" name="order[currency]" value="<%= @listing.currency %>" />
 						<%= f.label :quantity %>
 						<%=	f.select :quantity, options_for_select(1..20) %>
-						<%= f.submit "Order" %>
+						<%= f.submit "Order", data: { confirm: "Are you sure?" } %>
 					<% end %>
 				<% end %>
 			<% end %>
@@ -53,7 +53,7 @@
 		<%= link_to "Edit This Listing", "#{listing_path(@listing)}/edit" %>
 	<% end %>
 <% end %>
-        
+
 <h2>Reviews</h2>
 <h4>Average Rating: <%= @listing.listing_review_stars %> (<%= @listing.average_rating%>)</h4>
 <% if @listing.reviews.any? %>
@@ -69,8 +69,7 @@
 		<td style="text-align: left; border: 1px solid black "><%= review.star_image %> (<%=review.rating%>) </td>
 		<td style="text-align: left; border: 1px solid black "><%= review.content %></td>
 	</tr>
-	<% end %>	
+	<% end %>
 <% else %>
 	<h3>No reviews yet!</h3>
 <% end %>
-
