@@ -41,7 +41,7 @@ class ListingsController < ApplicationController
 		listing = Listing.find(params[:id])
 		listing.toggle_active
 		listing.save
-		
+
 		redirect_to user_path(current_user)
 	end
 

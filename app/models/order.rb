@@ -12,7 +12,6 @@ class Order < ApplicationRecord
     #update listing stock_quantity based on order quantity
     self.listing.stock_quantity -= self.quantity
     self.listing.save
-
     #access buyer wallet balance for specific currency
     self.access_buyer_wallet_of_order_currency -= self.total_price
     self.buyer.wallet.save
