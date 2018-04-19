@@ -1,0 +1,35 @@
+<% if logged_in? && (current_user.id == @user.id) %>
+  <% if @user.errors.any? %>
+  	<div>
+  		<h2>Errors:</h2>
+  		<ol>
+  			<% @user.errors.full_messages.each do |message| %>
+  			<li> <%= message %></li>
+  			<%end%>
+  		</ol>
+  	</div>
+  <% end %>
+
+  <h1>Edit Your Account</h1>
+  <%= form_for @user do |f| %>
+  	<div <%='class=error' if @user.errors[:username].any?%> >
+  		<%= f.label :username %>
+  		<%= f.text_field :username %> <br>
+  	</div>
+
+  	<div <%='class=error' if @user.errors[:email].any?%> >
+  		<%= f.label :email %>
+  		<%= f.text_field :email %> <br>
+  	</div>
+
+  	<div <%='class=error' if @user.errors[:password].any? || @user.errors[:password_confirmation].any? %> >
+  	    <%= f.label :password %>
+  		<%= f.password_field :password %> <br>
+  		<%= f.label "Confirm Password" %>
+  		<%= f.password_field :password_confirmation %><br>
+  	</div>
+
+    	<%= f.submit "Update Account Info" %> <%= link_to "Cancel", user_path(@user) %>
+
+  <% end %>
+<% end %>
