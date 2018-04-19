@@ -36,9 +36,13 @@ class ListingsController < ApplicationController
 
 	end
 
-	#Destroy
+	#Destroy ==> used as active toggle
 	def destroy
-
+		listing = Listing.find(params[:id])
+		listing.toggle_active
+		listing.save
+		
+		redirect_to user_path(current_user)
 	end
 
 	private
@@ -47,7 +51,7 @@ class ListingsController < ApplicationController
 	end
 
 	def listing_params
-		params.require(:listing).permit(:title, :description, 
+		params.require(:listing).permit(:title, :description,
 										:price, :image_url,
 									    :seller, :stock_quantity,
 									    :currency)

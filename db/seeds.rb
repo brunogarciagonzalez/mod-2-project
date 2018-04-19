@@ -33,7 +33,7 @@ listings << listing_2 = Listing.new(
   title: "HP Envy",
   description: "Windows best",
   price: 0.05,
-  currency: "BTC",  
+  currency: "BTC",
   stock_quantity: 10,
   image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
 )
@@ -50,7 +50,7 @@ listings << listing_4 = Listing.new(
   title: "eMachines",
   description: "old, sold as is",
   price: 1000.00,
-  currency: "USD", 
+  currency: "USD",
   stock_quantity: 10,
   image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
 )
@@ -61,6 +61,16 @@ listings << listing_5 = Listing.new(
   currency: "USD",
   stock_quantity: 10,
   image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
+)
+
+listings << listing_6 = Listing.new(
+  active: false,
+  title: "Lenovo Y520",
+  description: "powerful gaming laptop now at at a more affordable price",
+  price: 7000.00,
+  currency: "USD",
+  stock_quantity: 5,
+  image_url: "https://www3.lenovo.com/medias/lenovo-y520-amd-nvidia.png?context=bWFzdGVyfHJvb3R8NjA3NTF8aW1hZ2UvcG5nfGgzMi9oOWYvOTU4Mjk3ODM2NzUxOC5wbmd8ZmI1MGI4NTU0NGM5NTgyYjVlYzY0YTc3ODEyOGU1MzdlNWVmZDYzMTQyZWYyNDc4YTM5ODMxYzRiNDgzY2QyZA"
 )
 
 
@@ -76,14 +86,16 @@ user_2 = User.create(
   email: "bill@microsoft.com"
 )
 
-user_1.listings << [listing_1, listing_2]
-user_2.listings << [listing_3, listing_4, listing_5]
-
 user_3 = User.create(
   username: "Flatiron_Student",
   password: "Macbooks1234",
   email: "student@flatironschool.com"
 )
+
+user_1.listings << [listing_1, listing_2]
+user_2.listings << [listing_3, listing_4, listing_5]
+user_3.listings << listing_6
+
 User.all.each do |user|
   user.wallet = Wallet.create(Wallet.default_wallet_hash)
   user.save
@@ -95,4 +107,3 @@ order.buyer = user_2
 order.save
 
 listings.each{|l| l.save}
-
