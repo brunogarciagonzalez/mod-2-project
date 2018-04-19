@@ -29,7 +29,7 @@
   		<%= f.password_field :password_confirmation %><br>
   	</div>
 
-    	<%= f.submit "Update Account Info" %> <%= link_to "Cancel", user_path(@user) %>
+    	<%= f.submit "Update Account Info", data: { confirm: "Are you sure?" }  %> <%= link_to "Cancel", user_path(@user) %>
 
   <% end %>
 <% end %>
