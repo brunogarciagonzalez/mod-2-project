@@ -11,6 +11,16 @@
 
 <% if logged_in? && (current_user.id == @user.id) %>
 
+	<% if @wallet %>
+		<% if @wallet.errors.any? %>
+			<ul>
+				<% @wallet.errors.full_messages.each do |msg| %>
+					<li style="color: red"><%= msg %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	<% end %>
+	
 	<h2>Listings</h2>
 
 	<% if (@user.inactive_listings_count == 0) && (@user.active_listings_count == 0) %>
@@ -117,26 +127,31 @@
 			<th style="text-align: left; border: 1px solid black ">Currency</th>
 			<th style="text-align: left; border: 1px solid black ">Balance</th>
 			<th style="text-align: left; border: 1px solid black ">Address</th>
+			<th style="text-align: left; border: 1px solid black ">Manage Funds</th>
 		</tr>
 		<tr>
 			<td style="text-align: left; border: 1px solid black ">USD</td>
 			<td style="text-align: center; border: 1px solid black "><%= @user.wallet.usd_balance %></td>
 			<td style="text-align: left; border: 1px solid black "> N/A </td>
+			<td style="text-align: left; border: 1px solid black "><%= link_to "Deposit", "/users/#{@user.id}/wallet/deposit/usd" %> <br> <%= link_to "Withdraw", "/users/#{@user.id}/wallet/withdraw/usd" %></td>
 		</tr>
 		<tr>
 			<td style="text-align: left; border: 1px solid black ">Bitcoin</td>
 			<td style="text-align: center; border: 1px solid black "><%= @user.wallet.btc_balance %></td>
 			<td style="text-align: left; border: 1px solid black "><%= @user.wallet.btc_address %></td>
+			<td style="text-align: left; border: 1px solid black "><%= link_to "Deposit", "/users/#{@user.id}/wallet/deposit/btc" %> <br> <%= link_to "Withdraw", "/users/#{@user.id}/wallet/withdraw/btc" %></td>
 		</tr>
 		<tr>
 			<td style="text-align: left; border: 1px solid black ">Ethereum</td>
 			<td style="text-align: center; border: 1px solid black "><%= @user.wallet.eth_balance %></td>
 			<td style="text-align: left; border: 1px solid black "><%= @user.wallet.eth_address %></td>
+			<td style="text-align: left; border: 1px solid black "><%= link_to "Deposit", "/users/#{@user.id}/wallet/deposit/eth" %> <br> <%= link_to "Withdraw", "/users/#{@user.id}/wallet/withdraw/eth" %></td>
 		</tr>
 		<tr>
 			<td style="text-align: left; border: 1px solid black ">Litecoin</td>
 			<td style="text-align: center; border: 1px solid black "><%= @user.wallet.ltc_balance %></td>
 			<td style="text-align: left; border: 1px solid black "><%= @user.wallet.ltc_address %></td>
+			<td style="text-align: left; border: 1px solid black "><%= link_to "Deposit", "/users/#{@user.id}/wallet/deposit/ltc" %> <br> <%= link_to "Withdraw", "/users/#{@user.id}/wallet/withdraw/ltc" %></td>
 		</tr>
 	</table>
 

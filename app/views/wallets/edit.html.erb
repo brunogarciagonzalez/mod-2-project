@@ -1,0 +1,82 @@
+<% if logged_in? && (current_user == @wallet.user) %>
+
+  <h1>Manage Funds</h1>
+
+  <% if @wallet.errors.any? %>
+    <ul>
+      <% @wallet.errors.full_messages.each do |msg| %>
+        <li style="color: red"><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_for @wallet, :url =>{:controller=>"wallets", :action=> "update"} do |f| %>
+    <input type="hidden" name="wallet[id]" value="<%= @wallet.id %>" />
+    <% if @operation == "deposit" %>
+
+      <!-- deposit -->
+      <input type="hidden" name="wallet[operation]" value="deposit" />
+      <% case @currency %>
+      <% when "usd" %>
+        <h2>Deposit USD</h2>
+        <input type="hidden" name="wallet[currency]" value="USD" />
+        <h4>Your Account Balance: USD <%= @wallet.usd_balance %></h4>
+        <h4>Deposit: <%= f.number_field :usd_balance, value: nil, min: 0.01 %></h4>
+      <% when "btc" %>
+        <input type="hidden" name="wallet[currency]" value="BTC" />
+        <h2>Deposit BTC</h2>
+        <h4>Your Account Balance: BTC <%= @wallet.btc_balance %></h4>
+        <h4>Deposit: <%= f.number_field :btc_balance, value: nil, min: 0.00000001 %></h4>
+      <% when "eth" %>
+        <input type="hidden" name="wallet[currency]" value="ETH" />
+        <h2>Deposit ETH</h2>
+        <h4>Your Account Balance: ETH <%= @wallet.eth_balance %></h4>
+        <h4>Deposit: <%= f.number_field :eth_balance, value: nil, min: 0.000000000000000001 %></h4>
+      <% when "ltc" %>
+        <input type="hidden" name="wallet[currency]" value="LTC" />
+        <h2>Deposit LTC</h2>
+        <h4>Your Account Balance: LTC <%= @wallet.ltc_balance %></h4>
+        <h4>Deposit: <%= f.number_field :ltc_balance, value: nil, min: 0.00000001 %></h4>
+      <% else %>
+        <h3>CryptoZone encountered an error</h3>
+        <h3>Please re-try from Your Dashboard >> Wallet >> Manage Funds</h3>
+      <% end %>
+
+    <% elsif @operation == "withdraw" %>
+
+      <!-- withdraw -->
+      <input type="hidden" name="wallet[operation]" value="withdraw" />
+      <% case @currency %>
+      <% when "usd" %>
+        <h2>Withdraw USD</h2>
+        <input type="hidden" name="wallet[currency]" value="USD" />
+        <h4>Your Account Balance: USD <%= @wallet.usd_balance %></h4>
+        <h4>Withdraw: <%= f.number_field :usd_balance, value: nil %></h4>
+      <% when "btc" %>
+        <h2>Withdraw BTC</h2>
+        <input type="hidden" name="wallet[currency]" value="BTC" />
+        <h4>Your Account Balance: BTC <%= @wallet.btc_balance %></h4>
+        <h4>Withdraw: <%= f.number_field :btc_balance, value: nil %></h4>
+      <% when "eth" %>
+        <h2>Withdraw ETH</h2>
+        <input type="hidden" name="wallet[currency]" value="ETH" />
+        <h4>Your Account Balance: ETH <%= @wallet.eth_balance %></h4>
+        <h4>Withdraw: <%= f.number_field :eth_balance, value: nil %></h4>
+      <% when "ltc" %>
+        <h2>Withdraw LTC</h2>
+        <input type="hidden" name="wallet[currency]" value="LTC" />
+        <h4>Your Account Balance: LTC <%= @wallet.ltc_balance %></h4>
+        <h4>Withdraw: <%= f.number_field :ltc_balance, value: nil%></h4>
+      <% else %>
+        <h3>CryptoZone encountered an error</h3>
+        <h3>Please re-try from Your Dashboard >> Wallet >> Manage Funds</h3>
+      <% end %>
+
+    <% end %>
+
+    <%= f.submit @operation.capitalize, data: { confirm: "Are you sure?" } %>
+    <%= link_to "Cancel", user_path(@user) %>
+
+  <% end %>
+
+<% end %>

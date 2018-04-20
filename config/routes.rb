@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
   get '/register', to: 'users#new'
 
-  resources :wallets
+  get '/users/:id/wallet/:operation/:currency', to: 'wallets#edit'
+
+  post '/wallets/:id', to: "wallets#update"
+  get '/wallets/:id', to: 'wallets#showuser'
+  resources :wallets, only: [:edit, :update, :show]
   resources :listings
   resources :orders
   resources :users
