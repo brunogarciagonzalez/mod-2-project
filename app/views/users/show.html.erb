@@ -7,10 +7,10 @@
 
 <h3>User ID: <%= @user.id %></h3>
 <h3>Contact: <a href="mailto:<%= @user.email %>"><%= @user.email %></a></h3>
-<h5><%= link_to "Edit Account Info", "#{user_path(@user)}/edit" %></h5>
 
 <% if logged_in? && (current_user.id == @user.id) %>
 
+	<h5><%= link_to "Edit Account Info", "#{user_path(@user)}/edit" %></h5>
 	<% if @wallet %>
 		<% if @wallet.errors.any? %>
 			<ul>
@@ -20,7 +20,7 @@
 			</ul>
 		<% end %>
 	<% end %>
-	
+
 	<h2>Listings</h2>
 
 	<% if (@user.inactive_listings_count == 0) && (@user.active_listings_count == 0) %>
@@ -124,7 +124,7 @@
 						<%= link_to "Leave a Review", {:controller => "reviews", :action => "new", :order_id => order.id} %>
 					</td>
 				<% end %>
-				
+
 			</tr>
 			<% end %>
 		</table>
