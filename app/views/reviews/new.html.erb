@@ -1,0 +1,25 @@
+<h1>Leave a Review!</h1>
+<% if @review.errors.any? %>
+		<ul>
+			<% @review.errors.full_messages.each do |msg| %>
+				<li style="color: red;"> <%= msg %> </li>
+			<% end %>
+		</ul>
+<% end %>
+
+<h3>Product: <%= @listing.title %> </h3>
+<img style="width: 40%; align-text: left;" src="<%= @listing.image_url %>">
+
+	<%= form_for @review do |f| %>
+		<div>		
+			<%= f.label :rating %>
+			<%= f.select :rating, options_for_select(1..5) %>
+		</div>
+		<div>	
+		<%= f.label :Message %> <br>
+		<%= f.text_area :content %><br>
+		</div>
+
+		<input type="hidden" name="review[order_id]" value="<%= @order.id %>" />
+	  	<%= f.submit "Leave Review" %>
+	<% end %>

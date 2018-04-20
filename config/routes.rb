@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   post '/wallets/:id', to: "wallets#update"
   get '/wallets/:id', to: 'wallets#showuser'
-  resources :wallets, only: [:edit, :update, :show]
+
+  post '/leave_review', to: 'users#create_review'
+  # post '/leave_review', to: 'users#create_review' 
+  resources :wallets
+
   resources :listings
   resources :orders
   resources :users

@@ -1,0 +1,19 @@
+<h2>Your Review for: 
+ <%= @order.quantity == 1? "one" : "(#{@order.quantity}x)"%>
+ <%= @listing.title %> </h2>
+<h5>Placed on <%= @order.created_at.strftime("%A, %B %Y at %H:%M %z") %></h5>
+
+<img style="width: 40%; align-text: left;" src="<%= @listing.image_url %>">
+
+<h5>Rating: <%=@review.star_image%> (<%=@review.rating%>)</h5>
+
+<h5>Message: </h5>
+<div>
+	<%= @review.content %>
+</div>
+<div>	
+	<br>
+	<%= link_to "Edit this Review", {:controller => "reviews", :action =>"edit"}%>
+	<%= link_to 'Delete this Review', @review, method: :delete, data: { confirm: 'Are you sure?' }%>
+	<br><br>
+</div>

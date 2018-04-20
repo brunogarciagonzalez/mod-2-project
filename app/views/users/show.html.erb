@@ -100,17 +100,31 @@
 
 	<% if @user.buy_orders_count > 0 %>
 		<h2>Your Buy-Order History</h2>
+		<h6>
+			<%= link_to "Your Reviews", {:controller => "reviews", :action => "index"} %>
+		</h6>
 		<table style="width: 60%; border: 1px solid black">
 			<tr>
 				<th style="text-align: left; border: 1px solid black ">Order Id</th>
 				<th style="text-align: left; border: 1px solid black ">Listing Title</th>
 				<th style="text-align: left; border: 1px solid black ">Seller</th>
+				<th style="text-align: left; border: 1px solid black ">Your Review</th>
 			</tr>
 			<% @user.orders.each do |order| %>
 			<tr>
 				<td style="text-align: left; border: 1px solid black "><%= link_to order.id, order_path(order) %></td>
 				<td style="text-align: left; border: 1px solid black "><%= link_to order.listing.title, listing_path(order.listing)%></td>
 				<td style="text-align: left; border: 1px solid black "><%= link_to order.seller.username, order_path(order.seller)%></td>
+				<% if order.review %>
+					<td style="text-align: left; border: 1px solid black "> <%= link_to order.review.content[0..10], review_path(order.review)%>...<br>
+						Rated: <%= order.review.star_image %> (<%= order.review.rating%>)
+					</td>
+				<% else %>
+					<td style="text-align: left; border: 1px solid black ">
+						<%= link_to "Leave a Review", {:controller => "reviews", :action => "new", :order_id => order.id} %>
+					</td>
+				<% end %>
+				
 			</tr>
 			<% end %>
 		</table>
