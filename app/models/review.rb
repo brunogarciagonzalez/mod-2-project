@@ -4,6 +4,11 @@ class Review < ApplicationRecord
 	has_one :listing, through: :order
 	has_one :buyer, through: :order
 
+
+	#-----------Validations----------------#
+	validates :content, presence: true
+	validates :content, length: {minimum: 20}
+
 	def star_image
 		flag = self.rating.to_i
 		case flag

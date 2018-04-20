@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show, :edit, :update, :destroy]
+	before_action :set_user, only: [:show, :edit, :update, 
+									:destroy]
 
 	#Create
 	def new
@@ -19,6 +20,18 @@ class UsersController < ApplicationController
 			render :new
 		end
 	end
+
+	def leave_review
+		binding.pry
+		@review = Review.new 
+		redirect_to new_review_path
+	end
+
+	def create_review
+		binding.pry
+	end
+
+
 	#Read
 	def index
 		@users = User.all

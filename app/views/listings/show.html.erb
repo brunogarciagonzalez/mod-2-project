@@ -62,12 +62,15 @@
 		<th style="text-align: left; border: 1px solid black ">Reviewer</th>
 		<th style="text-align: left; border: 1px solid black ">Rating</th>
 		<th style="text-align: left; border: 1px solid black ">Message</th>
+		<th style="text-align: left; border: 1px solid black ">Link to review</th>
 	</tr>
 	<% @listing.reviews.each do |review| %>
 	<tr>
 		<td style="text-align: left; border: 1px solid black "> <%= link_to review.buyer.username, user_path(review.buyer)%></td>
 		<td style="text-align: left; border: 1px solid black "><%= review.star_image %> (<%=review.rating%>) </td>
+		<td style="text-align: left; border: 1px solid black "><%= review.content[0, 20]%>...</td>
 		<td style="text-align: left; border: 1px solid black "><%= review.content %></td>
+
 	</tr>
 	<% end %>	
 <% else %>
