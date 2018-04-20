@@ -11,6 +11,10 @@ class Order < ApplicationRecord
   validate :quantity_error_check
   validate :wallet_error_check
 
+  def order_date
+      self.created_at.strftime("%A, %B %Y")
+  end
+
   def transaction
     #update listing stock_quantity based on order quantity
     self.listing.stock_quantity -= self.quantity

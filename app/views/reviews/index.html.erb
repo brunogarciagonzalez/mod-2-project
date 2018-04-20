@@ -1,0 +1,24 @@
+<% if logged_in? %>
+	<h2>Your Review History</h2>
+	<% if current_user.reviews.any? %>
+		<table style="width: 80%; border: 1px solid black">
+			<tr>
+				<th style="text-align: left; border: 1px solid black ">Order Date</th>
+				<th style="text-align: left; border: 1px solid black ">Listing Title</th>
+				<th style="text-align: left; border: 1px solid black ">Content</th>
+				<th style="text-align: left; border: 1px solid black ">Rating</th>
+			</tr>
+
+			<% current_user.reviews.each do |review| %>
+				<tr>
+					<td style="text-align: left; border: 1px solid black "><%= link_to review.order.order_date, order_path(review.order) %></td>
+					<td style="text-align: left; border: 1px solid black "><%= link_to review.order.listing.title, listing_path(review.order.listing) %></td>
+					<td style="text-align: left; border: 1px solid black "><%= link_to review.content[0..10]+"..", review_path(review) %></td>
+					<td style="text-align: left; border: 1px solid black "><%= review.star_image%>(<%=review.rating%>)</td>
+				</tr>
+			<%end%>
+		</table>
+	<% else %>
+		<h4>You have not written any reviews yet!</h4>
+	<%end%>
+<%end%> 
