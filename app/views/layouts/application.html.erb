@@ -14,7 +14,6 @@
     <div id="layout_nav">
     	<%= link_to "Listings Index", listings_path %>
     	<%= link_to "Users Index", users_path %>
-      <%= link_to "Orders Index", orders_path %>
 
       <div style="display: inline-block; float:right">
         <%= "Welcome, #{current_user.username}.    " if logged_in?%>

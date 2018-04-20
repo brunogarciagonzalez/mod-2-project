@@ -22,45 +22,49 @@
 listings = []
 listings << listing_1 = Listing.new(
   title: "Macbook Pro",
-  description: "We're so brave",
-  price: 3000.00,
+  description: "We're so brave. Our laptops have -0.1mm keyboard travel,
+                half of a usb C port, and a new, forward-thinking touchbar.
+                Think different.",
+  price: 2995.95,
   currency: "USD",
   stock_quantity: 10,
   image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
 )
 
 listings << listing_2 = Listing.new(
-  title: "HP Envy",
-  description: "Windows best",
-  price: 0.05,
+  title: "HP Envy x2",
+  description: "Introducing our new HP Envy x2: Vivid, FHD touch display, silent fanless design,
+                two in one laptop and tablet.",
+  price: 0.12,
   currency: "BTC",
   stock_quantity: 10,
-  image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
+  image_url: "https://www.windowscentral.com/sites/wpcentral.com/files/styles/xlarge_wm_blw/public/field/image/2017/12/hp-envy-x2.jpg?itok=Gt7RyFVE"
 )
 
 listings << listing_3 = Listing.new(
   title: "Razer Blade",
-  description: "Ultimate thin and light gaming",
-  price: 1.00,
+  description: "Ultimate thin and light gaming. Powerful, portable, perfect. 
+                Featuring Intel's core-i7 7700hq and Nvidia's gtx 1060",
+  price: 3.41,
   currency: "ETH",
   stock_quantity: 10,
-  image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
+  image_url: "https://assets.pcmag.com/media/images/470577-bigger-display.jpg?width=640&height=360"
 )
 listings << listing_4 = Listing.new(
   title: "eMachines",
-  description: "old, sold as is",
-  price: 1000.00,
+  description: "old, sold as is. This beauty was top of the line back in 1999! Prepare yourselves for the ultimate in computing.",
+  price: 495.95,
   currency: "USD",
   stock_quantity: 10,
-  image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
+  image_url: "https://assets.pcmag.com/media/images/109553-emachines-t3302.jpg?width=333&height=245"
 )
 listings << listing_5 = Listing.new(
-  title: "MSI GS65VR",
-  description: "1070 max q",
-  price: 2000.00,
+  title: "MSI GS65 Stealth",
+  description: "Latest Intel 8th gen 6-core i7 processor. Nvidia gtx-1070 max-q. World's first 144hz thin bezel gaming laptop.",
+  price: 1999.95,
   currency: "USD",
   stock_quantity: 10,
-  image_url: "https://store.storeimages.cdn-apple.com/8750/as-images.apple.com/is/image/AppleInc/aos/published/images/m/bp/mbp13/gray/mbp13-gray-select-201610_GEO_TH?wid=452&hei=420&fmt=jpeg&qlt=95&op_usm=0.5,0.5&.v=1495927484878"
+  image_url: "https://www.msi.com/asset/resize/image/global/product/product_8_20180314154651_5aa8d36baba40.png62405b38c58fe0f07fcef2367d8a9ba1/600.png"
 )
 
 listings << listing_6 = Listing.new(
